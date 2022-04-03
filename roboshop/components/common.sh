@@ -33,7 +33,7 @@ SVC_SETUP() {
   sed -i -e 's/MONGO_DNSNAME/mongodb.robotlearning.internal/' \
          -e 's/REDIS_ENDPOINT/redis.robotlearning.internal/'  \
          -e 's/MONGO_ENDPOINT/mongodb.robotlearning.internal' \
-             /home/${FUSER}/${COMPONENT}/systemd.service
+             /home/${FUSER}/${COMPONENT}/systemd.service $>> ${LOFGILE}
   stat $?
 
   #2. Now, lets set up the service with systemctl.
