@@ -23,10 +23,12 @@ echo -n "Extracting $COMPONENT"
 cd /home/${FUSER} &>>${LOGFILE} && unzip -o /tmp/${COMPONENT}.zip &>>${LOGFILE} && mv ${COMPONENT}-main ${COMPONENT} &>>${LOGFILE}
 stat $?
 
+echo -n "Building Artifact :"
+cd shipping && mvn clean package &>>${LOGFILE}
 
- echo -n "Configuring SystemD : "
- SVC_SETUP
- stat $?
+echo -n "Configuring SystemD : "
+SVC_SETUP
+
 
 #```bash
 #$ cd /home/roboshop
