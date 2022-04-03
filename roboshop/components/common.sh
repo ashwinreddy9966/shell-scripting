@@ -22,8 +22,6 @@ USER_SETUP() {
     echo -n "Adding Application User"
     useradd ${FUSER} &>>${LOGFILE}
     stat $?
-  else 
-    echo -e "\e[33m Skipping \e[0m"
   fi
 }
 
@@ -33,7 +31,7 @@ SVC_SETUP() {
   sed -i -e 's/MONGO_DNSNAME/mongodb.robotlearning.internal/' \
          -e 's/REDIS_ENDPOINT/redis.robotlearning.internal/'  \
          -e 's/MONGO_ENDPOINT/mongodb.robotlearning.internal' \
-             /home/${FUSER}/${COMPONENT}/systemd.service $>> ${LOFGILE}
+             /home/${FUSER}/${COMPONENT}/systemd.service $>> ${LOGFILE}
   stat $?
 
   #2. Now, lets set up the service with systemctl.
