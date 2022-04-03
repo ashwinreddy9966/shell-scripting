@@ -1,8 +1,9 @@
 #!/bin/bash
 COMPONENT=catalogue
 source components/common.sh
+
 echo -n "Configuring the RPM repo for nodeJS :"
-curl -fsSL https://rpm.nodesource.com/setup_lts.x | bash -
+curl -fsSL https://rpm.nodesource.com/setup_lts.x | bash - $>> $LOGFILE
 stat $?
 
 echo -n "Installing nodeJS : "
@@ -20,7 +21,7 @@ stat $?
 cd /home/$FUSER
 
 echo -n "Unzipping $COMPONENT : "
-unzip -o /tmp/$COMPONENT.zip  $>> $LOGFILE
+unzip -o /tmp/catalogue.zip  $>> $LOGFILE
 stat $?
 
 mv catalogue-main $COMPONENT
