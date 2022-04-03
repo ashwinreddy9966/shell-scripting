@@ -15,7 +15,7 @@ echo -n "Downloading  $COMPONENT :"
 curl -f -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>${LOGFILE}
 stat $?
 
-echo "CleanUp Old Content"
+echo -n "CleanUp Old Content : "
 rm -rf /home/${FUSER}/${COMPONENT} &>>${LOGFILE}
 stat $?
 
@@ -23,15 +23,10 @@ echo -n "Extracting $COMPONENT"
 cd /home/${FUSER} &>>${LOGFILE} && unzip -o /tmp/${COMPONENT}.zip &>>${LOGFILE} && mv ${COMPONENT}-main ${COMPONENT} &>>${LOGFILE}
 stat $?
 
-# cd /home/roboshop/$COMPONENT
-# echo "Generating the $COMPONENT Jar"
-# mvn clean package &>> $LOGFILE
-# mv target/shipping-1.0.jar shipping.jar
-# stat $?
 
-# echo -n "Configuring SystemD : "
-# SVC_SETUP
-# stat $?
+ echo -n "Configuring SystemD : "
+ SVC_SETUP
+ stat $?
 
 #```bash
 #$ cd /home/roboshop
