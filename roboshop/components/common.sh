@@ -8,7 +8,6 @@ fi
 FUSER=roboshop
 LOGFILE="/tmp/robot.log"
 
-
 stat() {
   if [ $1 -eq 0 ]; then
     echo -e "\e[32m Success \e[0m"
@@ -17,15 +16,15 @@ stat() {
 fi
 }
 
-FUSER-SETUP() {
-echo -n "creating the $FUSER user:"
-id $FUSER &>> $LOGFILE
-if [ $? -ne 0 ]; then
-  useradd $FUSER
-  stat $?
-else
-  echo -e "\e[33m $FUSER user exists , skipping \e[0m"
-fi
+USER-SETUP() {
+  id ${FUSER} &>> ${LOGFILE}
+  if [ $? -ne 0 ]; then
+    echo "Adding Application User"
+    useradd ${FUSER} &>>${LOGFILE}
+    stat $?
+  else 
+    echo "Skipping"
+  fi
 }
 
 SVC-SETUP() {
