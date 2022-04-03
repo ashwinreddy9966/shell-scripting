@@ -14,6 +14,7 @@ stat $?
 echo -n "Downloading & Extracting $COMPONENT :"
 curl -s -L -o /tmp/shipping.zip "https://github.com/roboshop-devops-project/shipping/archive/main.zip"  &>> $LOGFILE
 curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/shipping/archive/main.zip" &>> $LOGFILE
+stat $?
 # unzip /tmp/shipping.zip  &>> $LOGFILE
 # mv /tmp/shipping-main /home/$FUSER/shipping
 # chown -R $FUSER:$FUSER /home/$FUSER/shipping
