@@ -24,7 +24,7 @@ cd /home/${FUSER} &>>${LOGFILE} && unzip -o /tmp/${COMPONENT}.zip &>>${LOGFILE} 
 stat $?
 
 echo -n "Building Artifact :"
-cd shipping && mvn clean package &>>${LOGFILE}
+cd shipping && mvn clean package &>>${LOGFILE} && mv target/shipping-1.0.jar shipping.jar &>>${LOG_FILE}
 
 echo -n "Configuring SystemD : "
 SVC_SETUP
