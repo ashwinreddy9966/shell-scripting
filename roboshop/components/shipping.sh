@@ -9,6 +9,8 @@ MAVEN
  curl -f -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>${LOGFILE}
  stat $?
 
+USER_SETUP
+
  echo -n "CleanUp Old Content : "
  rm -rf /home/${FUSER}/${COMPONENT} &>>${LOGFILE}
  stat $?
