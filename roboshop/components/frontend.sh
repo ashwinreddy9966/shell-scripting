@@ -1,6 +1,10 @@
 #!/bin/bash
 
-echo "Frontend Component"
+ID=$(id -u)
+if [ $ID -ne 0 ]; then
+  echo -e "\e[33m You need to be a root user to execute this or execute this with sudo command \[0m"
+  exit
+fi
 
  yum install nginx -y
  systemctl enable nginx
