@@ -13,20 +13,21 @@ stat $?
 
 echo -n "Downloading & Extracting $COMPONENT :"
 curl -s -L -o /tmp/shipping.zip "https://github.com/roboshop-devops-project/shipping/archive/main.zip"  &>> $LOGFILE
-unzip /tmp/shipping.zip  &>> $LOGFILE
-mv /tmp/shipping-main /home/$FUSER/shipping
-chown -R $FUSER:$FUSER /home/$FUSER/shipping
-stat $?
+curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/shipping/archive/main.zip" &>> $LOGFILE
+# unzip /tmp/shipping.zip  &>> $LOGFILE
+# mv /tmp/shipping-main /home/$FUSER/shipping
+# chown -R $FUSER:$FUSER /home/$FUSER/shipping
+# stat $?
 
-cd /home/roboshop/$COMPONENT
-echo "Generating the $COMPONENT Jar"
-mvn clean package &>> $LOGFILE
-mv target/shipping-1.0.jar shipping.jar
-stat $?
+# cd /home/roboshop/$COMPONENT
+# echo "Generating the $COMPONENT Jar"
+# mvn clean package &>> $LOGFILE
+# mv target/shipping-1.0.jar shipping.jar
+# stat $?
 
-echo -n "Configuring SystemD : "
-SVC_SETUP
-stat $?
+# echo -n "Configuring SystemD : "
+# SVC_SETUP
+# stat $?
 
 #```bash
 #$ cd /home/roboshop
