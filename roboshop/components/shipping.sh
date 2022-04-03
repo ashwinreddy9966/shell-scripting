@@ -3,10 +3,11 @@
 source components/common.sh
 COMPONENT=shipping
 
-echo -n "Installig Maven : "
+echo -n "Installing Maven : "
 yum install maven -y &>> $LOGFILE
 stat $?
 
+echo "Adding $FUSER User : "
 USER_SETUP
 stat $?
 
