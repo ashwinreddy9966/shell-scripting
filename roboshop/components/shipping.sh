@@ -17,6 +17,7 @@ stat $?
 
 echo -n "Extracting $COMPONENT"
 ls -ltr /tmp
+
 unzip /tmp/shipping.zip &>> $LOGFILE
 ls -ltr /tmp
 mv /tmp/shipping-main /home/$FUSER/shipping
