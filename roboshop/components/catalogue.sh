@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
-COMPONENT=catalogue
 source components/common.sh
+COMPONENT=catalogue
 
 USER_SETUP
 #echo -n "creating the $FUSER user:"

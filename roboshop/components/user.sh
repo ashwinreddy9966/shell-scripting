@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
-COMPONENT=user
-source components/common.sh
 
-USER_SETUP
+source components/common.sh
+COMPONENT=user
+
 #echo -n "creating the $FUSER user:"
 #id $FUSER   &>> $LOGFILE
 #if [ $? -ne 0 ]; then

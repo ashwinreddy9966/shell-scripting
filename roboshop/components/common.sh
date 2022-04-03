@@ -58,6 +58,8 @@ NODEJS() {
   yum install nodejs gcc-c++ -y  &>> $LOGFILE
   stat $?
 
+  USER_SETUP
+
   echo -n "Downloading $1 and unzipping:"
   curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip"
   rm -rf /home/$FUSER/$COMPONENT && cd /home/$FUSER && unzip -o /tmp/$COMPONENT.zip &>> $LOGFILE && mv ${COMPONENT}-main $COMPONENT && chown -R  $FUSER:$FUSER /home/$FUSER/$COMPONENT && cd /home/$FUSER/$COMPONENT &>> $LOGFILE
