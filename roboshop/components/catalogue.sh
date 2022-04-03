@@ -8,11 +8,11 @@ curl -fsSL https://rpm.nodesource.com/setup_lts.x | bash - &>> ${LOGFILE}
 stat $?
 
 echo -n "Installing nodeJS : "
-yum install nodejs gcc-c++ -y  $>> $LOGFILE
+yum install nodejs gcc-c++ -y  &>> $LOGFILE
 stat $?
 
 echo -n "creating the $FUSER :"
-id $FUSER   $>> $LOGFILE
+id $FUSER   &>> $LOGFILE
 if [ $? -ne 0 ]; then
   useradd $FUSER
   stat $?
@@ -27,13 +27,13 @@ stat $?
 cd /home/$FUSER
 
 echo -n "Unzipping $COMPONENT : "
-unzip -o /tmp/catalogue.zip  $>> $LOGFILE
+unzip -o /tmp/catalogue.zip  &>> $LOGFILE
 stat $?
 
 mv catalogue-main $COMPONENT
 cd /home/$FUSER/$COMPONENT
 echo -n "Intalling nodejs and their packages : "
-npm install
+npm install&>> $LOGFILE
 stat $?
 
 
