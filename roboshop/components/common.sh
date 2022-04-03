@@ -22,6 +22,7 @@ USER_SETUP() {
     echo -n "Adding Application User"
     useradd ${FUSER} &>>${LOGFILE}
     stat $?
+
   fi
 }
 
@@ -42,6 +43,7 @@ SVC_SETUP() {
 
   #2. Now, lets set up the service with systemctl.
   echo -n "Aligning $COMPONENT ownership to $FUSER"
+  chown -P $FUSER:$FUSER /home/$FUSER/$COMPONENT
   mv /home/$FUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
   chown $FUSER:$FUSER /etc/systemd/system/$COMPONENT.service
   echo -n "Daemon-reload : "  &>> $LOGFILE &&  systemctl daemon-reload  &>> $LOGFILE
@@ -75,12 +77,32 @@ NODEJS() {
 
 }
 
+DOWNLOAD_EXTRACT(){
+curl -f -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>${LOGFILE}
+stat $?
 
-# MAVEN(){
-#   echo -n "Installing Maven : "
-#   yum install maven -y &>> $LOGFILE
-#   stat $?
+echo -n "CleanUp Old Content : "
+rm -rf /home/${FUSER}/${COMPONENT} &>>${LOGFILE}
+stat $?
 
-#   USER_SETUP
+echo -n "Extracting $COMPONENT"
+cd /home/${FUSER} &>>${LOGFILE} && unzip -o /tmp/${COMPONENT}.zip &>>${LOGFILE} && mv ${COMPONENT}-main ${COMPONENT} &>>${LOGFILE}
+stat $?
+
+}
+
+
+MAVEN(){
+  echo -n "Installing Maven : "
+  yum install maven -y &>> $LOGFILE
+  stat $?
   
-# }
+  # Configures and add user
+  USER_SETUP
+
+  # Downloads & Extract
+  DOWNLOAD_EXTRACT
+  
+  # Service Start
+  SVC_SETUP
+}
