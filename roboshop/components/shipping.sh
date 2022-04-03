@@ -25,7 +25,7 @@ stat $?
 
 echo -n "Configuring SystemD : "
 SVC_SETUP
-
+stat $?
 
 #```bash
 #$ cd /home/roboshop
