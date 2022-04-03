@@ -11,13 +11,13 @@ echo -n "Installing nodeJS : "
 yum install nodejs gcc-c++ -y  &>> $LOGFILE
 stat $?
 
-echo -n "creating the $FUSER :"
+echo -n "creating the $FUSER user:"
 id $FUSER   &>> $LOGFILE
 if [ $? -ne 0 ]; then
   useradd $FUSER
   stat $?
 else
-  echo -e "\e[33m $FUSER exists , skipping creation \e[0m"
+  echo -e "\e[33m $FUSER user exists , skipping \e[0m"
 fi
 
 echo -n "Downloading $1 :"
@@ -25,7 +25,6 @@ curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/cat
 stat $?
 
 cd /home/$FUSER
-
 echo -n "Unzipping $COMPONENT : "
 unzip -o /tmp/catalogue.zip  &>> $LOGFILE
 stat $?
