@@ -39,7 +39,12 @@ fi
 
 echo -n "Downloading the schema : "
 curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip" &>>${LOGFILE}
-cd /tmp && 
+stat $?
+
+echo -n "Extracting & Injecting Schema : "
+cd /tmp && unzip mysql.zip && cd mysql-main &&  mysql -u root -pRoboShop@1 <shipping.sql  &>>${LOGFILE}
+stat $?
+
 
 
 ## mysql_secure_installation
