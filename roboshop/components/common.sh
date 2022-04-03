@@ -40,8 +40,8 @@ SVC-SETUP() {
   echo -n "Daemon-reload : "  &>> $LOGFILE &&  systemctl daemon-reload  &>> $LOGFILE
   stat $?
 
-  echo -n "Starting $COMPONENT"
-  systemctl start $COMPONENT &>> $LOGFILE && systemctl enable $COMPONENT &>> $LOGFILE
+  echo -n "Retarting $COMPONENT"
+  systemctl restart $COMPONENT &>> $LOGFILE && systemctl enable $COMPONENT &>> $LOGFILE
   stat $?
 }
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-COMPONENT=redis
+COMPONENT=user
 source components/common.sh
 
 # Made Function for the below
