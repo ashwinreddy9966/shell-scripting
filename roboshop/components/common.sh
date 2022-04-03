@@ -19,11 +19,11 @@ fi
 USER_SETUP() {
   id ${FUSER} &>> ${LOGFILE}
   if [ $? -ne 0 ]; then
-    echo "Adding Application User"
+    echo -n "Adding Application User"
     useradd ${FUSER} &>>${LOGFILE}
     stat $?
   else 
-    echo "Skipping"
+    echo -e "\e[33m Skipping \e[0m"
   fi
 }
 
