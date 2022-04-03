@@ -13,4 +13,4 @@ stat() {
 fi
 }
 
-LOGFILE=/tmp/robot.log
+LOGFILE="/tmp/robot.log"
