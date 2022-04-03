@@ -12,17 +12,16 @@ USER_SETUP
 stat $?
 
 echo -n "Downloading  $COMPONENT :"
-curl -s -L -o /tmp/shipping.zip "https://github.com/roboshop-devops-project/$COMPONENT/archive/main.zip"  &>> $LOGFILE
+curl -f -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>${LOGFILE}
+stat $?
+
+echo "CleanUp Old Content"
+rm -rf /home/${FUSER}/${COMPONENT} &>>${LOGFILE}
 stat $?
 
 echo -n "Extracting $COMPONENT"
-ls -ltr /tmp
+cd /home/${APP_USER} &>>${LOG_FILE} && unzip -o /tmp/${COMPONENT}.zip &>>${LOG_FILE} && mv ${COMPONENT}-main ${COMPONENT} &>>${LOG_FILE}
 
-unzip -o /tmp/shipping.zip &>> $LOGFILE
-ls -ltr /tmp
-mv /tmp/shipping-main /home/$FUSER/shipping
-chown -R $FUSER:$FUSER /home/$FUSER/shipping
-stat $?
 # cd /home/roboshop/$COMPONENT
 # echo "Generating the $COMPONENT Jar"
 # mvn clean package &>> $LOGFILE
