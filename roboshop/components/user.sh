@@ -31,7 +31,6 @@ source components/common.sh
 #stat $?
 
 NODEJS
-
 # Made function for the below
 ##1. Updating SystemD file with correct DNS Name
 #echo -n "Updating the mogndodns name : "
@@ -49,5 +48,4 @@ NODEJS
 #systemctl start $COMPONENT &>> $LOGFILE
 #systemctl enable $COMPONENT &>> $LOGFILE
 #stat $?
-
 SVC-SETUP
