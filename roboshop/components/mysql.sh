@@ -29,6 +29,19 @@ if [ $? -ne 0 ]; then
 fi
 
 
+# Echo removing the password validate plugin :
+echo show plugins | mysql -uroot -pRoboShop@1 &>>${LOGFILE} | grep validate_password &>>${LOGFILE}
+if [ $? -eq 0 ]; then
+  echo " uninstall plugin validate_password;"  >/tmp/pass-validate.sql
+  mysql --connect-expired-password -uroot -pRoboShop@1 </tmp/pass-validate.sql  &>>${LOGFILE}
+  stat $?
+fi
+
+echo -n "Downloading the schema : "
+curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip" &>>${LOGFILE}
+cd /tmp && 
+
+
 ## mysql_secure_installation
 ## mysql -uroot -pRoboShop@1
 #> uninstall plugin validate_password;
