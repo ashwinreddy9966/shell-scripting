@@ -29,7 +29,7 @@ stat $?
 
 echo -n "Unziping Schema : "
 cd /tmp
-unzip mongodb.zip &>> $LOGFILE
+unzip -o mongodb.zip &>> $LOGFILE  # Ensure you have -o to override if the tile exists
 stat $?
 
 echo -n "Injecting the schema : "
