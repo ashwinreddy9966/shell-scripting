@@ -86,9 +86,9 @@ echo -n "CleanUp Old Content : "
 rm -rf /home/${FUSER}/${COMPONENT} &>>${LOGFILE}
 stat $?
 
-# echo -n "Extracting $COMPONENT"
-# cd /home/${FUSER} &>>${LOGFILE} && unzip -o /tmp/${COMPONENT}.zip &>>${LOGFILE} && mv ${COMPONENT}-main ${COMPONENT} &>>${LOGFILE}
-# stat $?
+echo -n "Extracting $COMPONENT"
+cd /home/${FUSER} &>>${LOGFILE} # && unzip -o /tmp/${COMPONENT}.zip &>>${LOGFILE} && mv ${COMPONENT}-main ${COMPONENT} &>>${LOGFILE}
+stat $?
 
 }
 
