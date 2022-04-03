@@ -29,14 +29,16 @@ echo -n "Installing nodejs and their packages : "
 npm install &>> $LOGFILE
 stat $?
 
-
-#1. Update SystemD file with correct IP addresses
-#
-#    Update `MONGO_DNSNAME` with MongoDB Server IP
-#
+#1. Updating SystemD file with correct DNS Name
+echo -n "Updating the mogndodns name : "
+sed -i -e s/MONGO_DNSNAME/mongodb.robotlearning.internal  /home/$FUSER/$COMPONENT/systemd.service
+stat $?
 #2. Now, lets set up the service with systemctl.
-#
-## mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
-## systemctl daemon-reload
-## systemctl start catalogue
-## systemctl enable catalogue
+
+mv /home/$FUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
+chown $FUSER:$FUSER /etc/systemd/system/$COMPONENT.service
+systemctl daemon-reload  &>> $LOGFILE
+
+echo -n "Starting $COMPONENT"
+systemctl start $COMPONENT &>> $LOGFILE
+systemctl enable $COMPONENT &>> $LOGFILE
