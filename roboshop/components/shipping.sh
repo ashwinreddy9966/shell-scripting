@@ -23,7 +23,6 @@ ls -ltr /tmp
 mv /tmp/shipping-main /home/$FUSER/shipping
 chown -R $FUSER:$FUSER /home/$FUSER/shipping
 stat $?
-
 # cd /home/roboshop/$COMPONENT
 # echo "Generating the $COMPONENT Jar"
 # mvn clean package &>> $LOGFILE
