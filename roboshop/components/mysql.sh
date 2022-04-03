@@ -19,7 +19,7 @@ stat $?
 #echo -n "Fetching the default root password : "
 #DEFAULT_ROOT_PASSWORD=$(sudo grep temp /var/log/mysqld.log | head -n 1 |  awk -F " " '{print $NF}')
 
-echo -n "show databases;" | mysql -uroot -pRoboShop@1
+echo -n "show databases;" | mysql -uroot -pRoboShop@1 &>>${LOGFILE}
 if [ $? -ne 0]; then
   echo "Changing the $COMPONENT root password"
   echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('RoboShop@1');" >/tmp/rootpass.sql
