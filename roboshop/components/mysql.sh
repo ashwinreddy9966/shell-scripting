@@ -42,7 +42,11 @@ curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/a
 stat $?
 
 echo -n "Extracting & Injecting Schema : "
-cd /tmp && unzip mysql.zip && cd mysql-main &&  mysql -u root -pRoboShop@1 <shipping.sql  &>>${LOGFILE}
+cd /tmp && unzip -o mysql.zip &>>${LOG_FILE}
+stat $?
+
+echo -n "Injecting Schema : "
+mysql -u root -pRoboShop@1 <shipping.sql  &>>${LOGFILE}
 stat $?
 
 
