@@ -3,7 +3,7 @@ set -e
 COMPONENT=catalogue
 source components/common.sh
 
-FUSER-SETUP
+USER-SETUP
 #echo -n "creating the $FUSER user:"
 #id $FUSER   &>> $LOGFILE
 #if [ $? -ne 0 ]; then
