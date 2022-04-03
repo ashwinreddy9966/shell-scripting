@@ -28,10 +28,12 @@ curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongo
 stat $?
 
 echo -n "Unziping Schema : "
-cd /tmp && unzip mongodb.zip &>> $LOGFILE  && cd mongodb-main
+cd /tmp
+unzip mongodb.zip &>> $LOGFILE
 stat $?
 
 echo -n "Injecting the schema : "
+cd mongodb-main
 mongo < catalogue.js &>> $LOGFILE  && mongo < users.js &>> $LOGFILE
 stat $?
 
