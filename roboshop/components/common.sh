@@ -16,7 +16,7 @@ stat() {
 fi
 }
 
-USER-SETUP() {
+USER_SETUP() {
   id ${FUSER} &>> ${LOGFILE}
   if [ $? -ne 0 ]; then
     echo "Adding Application User"
@@ -27,7 +27,7 @@ USER-SETUP() {
   fi
 }
 
-SVC-SETUP() {
+SVC_SETUP() {
   #1. Updating SystemD file with correct DNS Name
   echo -n "Updating the $COMPONENT DNS name : "
   sed -i -e 's/MONGO_DNSNAME/mongodb.robotlearning.internal/' \

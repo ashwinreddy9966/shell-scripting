@@ -3,7 +3,7 @@ set -e
 COMPONENT=catalogue
 source components/common.sh
 
-USER-SETUP
+USER_SETUP
 #echo -n "creating the $FUSER user:"
 #id $FUSER   &>> $LOGFILE
 #if [ $? -ne 0 ]; then
@@ -50,4 +50,4 @@ NODEJS
 #systemctl enable $COMPONENT &>> $LOGFILE
 #stat $?
 
-SVC-SETUP
+SVC_SETUP

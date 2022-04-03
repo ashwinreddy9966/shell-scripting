@@ -3,7 +3,7 @@ set -e
 COMPONENT=user
 source components/common.sh
 
-USER-SETUP
+USER_SETUP
 #echo -n "creating the $FUSER user:"
 #id $FUSER   &>> $LOGFILE
 #if [ $? -ne 0 ]; then
@@ -34,7 +34,7 @@ NODEJS
 #stat $?
 
 
-SVC-SETUP
+SVC_SETUP
 ##1. Updating SystemD file with correct DNS Name
 #echo -n "Updating the mogndodns name : "
 #sed -i -e 's/MONGO_DNSNAME/mongodb.robotlearning.internal/'  /home/$FUSER/$COMPONENT/systemd.service
