@@ -46,6 +46,7 @@ cd /tmp && unzip -o mysql.zip &>>${LOG_FILE}
 stat $?
 
 echo -n "Injecting Schema : "
+cd mysql-main
 mysql -u root -pRoboShop@1 <shipping.sql  &>>${LOGFILE}
 stat $?
 
