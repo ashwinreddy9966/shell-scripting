@@ -30,10 +30,11 @@ SVC-SETUP() {
   echo -n "Updating the $COMPONENT DNS name : "
   sed -i -e 's/MONGO_DNSNAME/mongodb.robotlearning.internal/' \
          -e 's/REDIS_ENDPOINT/redis.robotlearning.internal/'  \
+         -e 's/MONGO_ENDPOINT/mongodb.robotlearning.internal' \
             /home/$FUSER/$COMPONENT/systemd.service
   stat $?
-  #2. Now, lets set up the service with systemctl.
 
+  #2. Now, lets set up the service with systemctl.
   echo -n "Aligning $COMPONENT ownership to $FUSER"
   mv /home/$FUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
   chown $FUSER:$FUSER /etc/systemd/system/$COMPONENT.service
