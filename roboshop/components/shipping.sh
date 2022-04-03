@@ -12,11 +12,13 @@ USER_SETUP
 stat $?
 
 echo -n "Downloading  $COMPONENT :"
-curl -s -L -o /tmp/shipping.zip "https://github.com/roboshop-devops-project/$COMPONENT/archive/main.zip" &>> $LOGFILE
+curl -s -L -o /tmp/shipping.zip "https://github.com/roboshop-devops-project/$COMPONENT/archive/main.zip"  &>> $LOGFILE
 stat $?
 
 echo -n "Extracting $COMPONENT"
-unzip /tmp/shipping.zip  &>> $LOGFILE
+ls -ltr /tmp
+unzip /tmp/shipping.zip &>> $LOGFILE
+ls -ltr /tmp
 mv /tmp/shipping-main /home/$FUSER/shipping
 chown -R $FUSER:$FUSER /home/$FUSER/shipping
 stat $?
