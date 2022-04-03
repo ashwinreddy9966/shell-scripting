@@ -12,8 +12,13 @@ yum install nodejs gcc-c++ -y  $>> $LOGFILE
 stat $?
 
 echo -n "creating the $FUSER :"
-useradd $FUSER
-stat $?
+id $FUSER
+if [ $? -ne 0 ]; then
+  useradd $FUSER
+  stat $?
+else
+  echo "$FUSER exists , skipping creation"
+fi
 
 echo -n "Downloading $1 :"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip"
