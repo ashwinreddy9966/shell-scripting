@@ -20,7 +20,7 @@ rm -rf /home/${FUSER}/${COMPONENT} &>>${LOGFILE}
 stat $?
 
 echo -n "Extracting $COMPONENT"
-cd /home/${APP_USER} &>>${LOG_FILE} && unzip -o /tmp/${COMPONENT}.zip &>>${LOG_FILE} && mv ${COMPONENT}-main ${COMPONENT} &>>${LOGFILE}
+cd /home/${FUSER} &>>${LOGFILE} && unzip -o /tmp/${COMPONENT}.zip &>>${LOGFILE} && mv ${COMPONENT}-main ${COMPONENT} &>>${LOGFILE}
 
 # cd /home/roboshop/$COMPONENT
 # echo "Generating the $COMPONENT Jar"
