@@ -25,8 +25,8 @@ echo -n "Downloading the schema : "
 curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip"
 stat $?
 
-cd /tmp && unzip mongodb.zip  && cd mongodb-main
+cd /tmp && unzip mongodb.zip &>> $LOGFILE  && cd mongodb-main
 echo -n "Injecting the schema : "
-mongo < catalogue.js && mongo < users.js
+mongo < catalogue.js &>> $LOGFILE  && mongo < users.js &>> $LOGFILE
 stat $?
 
