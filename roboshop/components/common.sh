@@ -30,7 +30,10 @@ USER_SETUP() {
 SVC_SETUP() {
   #1. Updating SystemD file with correct DNS Name
   echo -n "Updating the $COMPONENT DNS name : "
-  sed -i -e 's/MONGO_DNSNAME/mongodb.robotlearning.internal/' -i -e 's/REDIS_ENDPOINT/redis.robotlearning.internal/'  -i -e 's/MONGO_ENDPOINT/mongodb.robotlearning.internal' /home/$FUSER/$COMPONENT/systemd.service
+  sed -i -e 's/MONGO_DNSNAME/mongodb.robotlearning.internal/' \
+         -e 's/REDIS_ENDPOINT/redis.robotlearning.internal/'  \
+         -e 's/MONGO_ENDPOINT/mongodb.robotlearning.internal' \
+             /home/${FUSER}/${COMPONENT}/systemd.service
   stat $?
 
   #2. Now, lets set up the service with systemctl.
