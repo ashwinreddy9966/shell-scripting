@@ -1,12 +1,13 @@
 #validating whether the user been run is ROOT or not
-ID="${APP_USER}" # &>>${LOG_FILE}
-if [ ${ID} -ne 0 ]; then
+ID=$(id -u)
+if [ $ID -ne 0 ]; then
   echo -e "\e[33m You need to be a root user to execute this or execute this with sudo command \[0m"
   exit 1
 fi
 
 FUSER=roboshop
 LOGFILE="/tmp/robot.log"
+
 
 stat() {
   if [ $1 -eq 0 ]; then
@@ -16,14 +17,16 @@ stat() {
 fi
 }
 
+FUSER-SETUP() {
 echo -n "creating the $FUSER user:"
-id $FUSER   &>> $LOGFILE
+id $FUSER &>> $LOGFILE
 if [ $? -ne 0 ]; then
   useradd $FUSER
   stat $?
 else
   echo -e "\e[33m $FUSER user exists , skipping \e[0m"
 fi
+}
 
 SVC-SETUP() {
   #1. Updating SystemD file with correct DNS Name

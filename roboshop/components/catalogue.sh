@@ -3,14 +3,7 @@ set -e
 COMPONENT=catalogue
 source components/common.sh
 
-#echo -n "Configuring the RPM repo for nodeJS :"
-#curl -fsSL https://rpm.nodesource.com/setup_lts.x | bash - &>> ${LOGFILE}
-#stat $?
-#
-#echo -n "Installing nodeJS : "
-#yum install nodejs gcc-c++ -y  &>> $LOGFILE
-#stat $?
-#
+FUSER-SETUP
 #echo -n "creating the $FUSER user:"
 #id $FUSER   &>> $LOGFILE
 #if [ $? -ne 0 ]; then
@@ -20,6 +13,17 @@ source components/common.sh
 #  echo -e "\e[33m $FUSER user exists , skipping \e[0m"
 #fi
 #
+
+NODEJS
+#echo -n "Configuring the RPM repo for nodeJS :"
+#curl -fsSL https://rpm.nodesource.com/setup_lts.x | bash - &>> ${LOGFILE}
+#stat $?
+#
+#echo -n "Installing nodeJS : "
+#yum install nodejs gcc-c++ -y  &>> $LOGFILE
+#stat $?
+#
+
 #echo -n "Downloading $1 and unzipping:"
 #curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip"
 #rm -rf /home/$FUSER/$COMPONENT && cd /home/$FUSER && unzip -o /tmp/catalogue.zip &>> $LOGFILE && mv ${COMPONENT}-main $COMPONENT && chown -R  $FUSER:$FUSER /home/$FUSER/$COMPONENT && cd /home/$FUSER/$COMPONENT &>> $LOGFILE
@@ -28,8 +32,6 @@ source components/common.sh
 #echo -n "Installing nodejs and their packages : "
 #npm install &>> $LOGFILE
 #stat $?
-
-NODEJS
 
 ##1. Updating SystemD file with correct DNS Name
 #echo -n "Updating the mogndodns name : "
