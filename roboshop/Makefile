@@ -4,9 +4,6 @@ frontend:
 mongodb:
 	bash components/mongodb.sh
 
-cart:
-	bash components/cart.sh
-
 catalogue:
 	bash components/catalogue.sh
 
@@ -15,3 +12,22 @@ redis:
 
 user:
 	bash components/user.sh
+
+cart:
+	bash components/cart.sh
+
+mysql:
+	bash components/mysql.sh
+
+shipping:
+	bash components/shipping.sh
+
+payment:
+	bash components/payment.sh
+
+rabbitmq:
+	bash components/rabbitmq.sh
+
+dispatch:
+	bash components/dispatch.sh
+
