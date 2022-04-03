@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "Frontend Component"
+echo "Cart Component"
