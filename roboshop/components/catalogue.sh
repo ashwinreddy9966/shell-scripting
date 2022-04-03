@@ -20,18 +20,12 @@ else
   echo -e "\e[33m $FUSER user exists , skipping \e[0m"
 fi
 
-echo -n "Downloading $1 :"
+echo -n "Downloading $1 and unzipping:"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip"
+rm -rf /home/$FUSER/$COMPONENT && cd /home/$FUSER && unzip -o /tmp/catalogue.zip && mv catalogue-main $COMPONENT && cd /home/$FUSER/$COMPONENT &>> $LOGFILE
 stat $?
 
-cd /home/$FUSER
-echo -n "Unzipping $COMPONENT : "
-unzip -o /tmp/catalogue.zip  &>> $LOGFILE
-stat $?
-
-mv -f catalogue-main $COMPONENT
-cd /home/$FUSER/$COMPONENT
-echo -n "Intalling nodejs and their packages : "
+echo -n "Installing nodejs and their packages : "
 npm install&>> $LOGFILE
 stat $?
 
