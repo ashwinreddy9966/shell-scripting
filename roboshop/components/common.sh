@@ -54,7 +54,6 @@ SVC_SETUP() {
 
   echo -n "Retarting $COMPONENT"
   systemctl restart $COMPONENT &>> $LOGFILE && systemctl enable $COMPONENT &>> $LOGFILE
-  echo "Test Message"
   stat $?
 }
 

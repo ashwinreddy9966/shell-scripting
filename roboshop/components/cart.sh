@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source components/common.sh
-COMPONENT=user
+COMPONENT=cart
 
 NODEJS
 SVC_SETUP
