@@ -13,4 +13,5 @@ stat() {
 fi
 }
 
+FUSER=roboshop
 LOGFILE="/tmp/robot.log"
