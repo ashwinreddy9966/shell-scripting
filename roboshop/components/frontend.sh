@@ -9,33 +9,36 @@ fi
 
 stat() {
   if [ $1 -eq 0 ]; then
-    echo -e "\e[31m Success \e[0m"
+    echo -e "\e[32m Success \e[0m"
   else
-    echo -e "\e[32m Failure \e[0m"
+    echo -e "\e[31m Failure \e[0m"
 fi
 }
 
 LOGFILE=/tmp/$1.sh
 
 echo -n "Installing Nignix : "
-yum install nginx -y
+yum install nginx -y &>> $LOGFILE
 stat $?
 
+ systemctl enable nginx &>> $LOGFILE
 
+ systemctl start nginx  &>> $LOGFILE
+ echo -e "Downloading Frontend : "
+ curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" &>> $LOGFILE
  stat $?
 
- systemctl enable nginx &>> $LOGFILE
- systemctl start nginx  &>> $LOGFILE
- curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" &>> $LOGFILE
- $?
  cd /usr/share/nginx/html
  rm -rf *
  unzip /tmp/frontend.zip
  mv frontend-main/* .
  mv static/* .
  rm -rf frontend-main README.md
+ echo -n "Configuring the nginx config : "
  mv localhost.conf /etc/nginx/default.d/roboshop.conf
+ stat $?
 
 systemctl enable nginx
+echo -n "Restarting Nginx : "
 systemctl restart nginx
 stat $?
