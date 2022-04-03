@@ -21,6 +21,7 @@ stat $?
 
 echo -n "Extracting $COMPONENT"
 cd /home/${FUSER} &>>${LOGFILE} && unzip -o /tmp/${COMPONENT}.zip &>>${LOGFILE} && mv ${COMPONENT}-main ${COMPONENT} &>>${LOGFILE}
+stat $?
 
 # cd /home/roboshop/$COMPONENT
 # echo "Generating the $COMPONENT Jar"
