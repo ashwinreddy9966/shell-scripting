@@ -20,6 +20,7 @@ stat $?
 
 echo -n "Restart Mongo : "
 systemctl restart mongod
+stat $?
 
 echo -n "Downloading the schema : "
 curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip"
