@@ -28,10 +28,21 @@ USER_SETUP() {
 SVC_SETUP() {
   #1. Updating SystemD file with correct DNS Name
   echo -n "Updating the $COMPONENT DNS name : "
-  sed -i -e 's/MONGO_DNSNAME/mongodb.robotlearning.internal/' \
-         -e 's/REDIS_ENDPOINT/redis.robotlearning.internal/'  \
-         -e 's/MONGO_ENDPOINT/mongodb.robotlearning.internal' \
-             /home/${FUSER}/${COMPONENT}/systemd.service $>> ${LOGFILE}
+#  sed -i -e 's/MONGO_DNSNAME/mongodb.robotlearning.internal/' \
+#         -e 's/REDIS_ENDPOINT/redis.robotlearning.internal/'  \
+#         -e 's/MONGO_ENDPOINT/mongodb.robotlearning.internal' \
+#             /home/${FUSER}/${COMPONENT}/systemd.service $>> ${LOGFILE}
+
+  sed -i  -e 's/MONGO_DNSNAME/mongodb.robotlearning.internal/' \
+          -e 's/REDIS_ENDPOINT/redis.robotlearning.internal/' \
+          -e 's/MONGO_ENDPOINT/mongodb.robotlearning.internal/' \
+          -e 's/CATALOGUE_ENDPOINT/catalogue.robotlearning.internal/' \
+          -e 's/CARTENDPOINT/cart.robotlearning.internal/' \
+          -e 's/DBHOST/mysql.robotlearning.internal/' \
+          -e 's/CARTHOST/cart.robotlearning.internal/' \
+          -e 's/USERHOST/user.robotlearning.internal/' \
+          -e 's/AMQPHOST/rabbitmq.robotlearning.internal/' \
+          /home/roboshop/${COMPONENT}/systemd.service &>>${LOGFILE}
   stat $?
 
   #2. Now, lets set up the service with systemctl.
