@@ -17,7 +17,7 @@ if [ $? -ne 0 ]; then
   useradd $FUSER
   stat $?
 else
-  echo "$FUSER exists , skipping creation"
+  echo -e "\e[33m $FUSER exists , skipping creation \e[0m"
 fi
 
 echo -n "Downloading $1 :"
