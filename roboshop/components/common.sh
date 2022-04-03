@@ -28,10 +28,13 @@ fi
 SVC-SETUP() {
   #1. Updating SystemD file with correct DNS Name
   echo -n "Updating the $COMPONENT DNS name : "
-  sed -i -e 's/MONGO_DNSNAME/mongodb.robotlearning.internal/' -e 's/REDIS_ENDPOINT/redis.robotlearning.internal/'  /home/$FUSER/$COMPONENT/systemd.service
+  sed -i -e 's/MONGO_DNSNAME/mongodb.robotlearning.internal/' \
+         -e 's/REDIS_ENDPOINT/redis.robotlearning.internal/'  \
+            /home/$FUSER/$COMPONENT/systemd.service
   stat $?
   #2. Now, lets set up the service with systemctl.
 
+  echo -n "Aligning $COMPONENT ownership to $FUSER"
   mv /home/$FUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
   chown $FUSER:$FUSER /etc/systemd/system/$COMPONENT.service
   echo -n "Daemon-reload : "  &>> $LOGFILE &&  systemctl daemon-reload  &>> $LOGFILE
@@ -57,7 +60,7 @@ NODEJS() {
   rm -rf /home/$FUSER/$COMPONENT && cd /home/$FUSER && unzip -o /tmp/$COMPONENT.zip &>> $LOGFILE && mv ${COMPONENT}-main $COMPONENT && chown -R  $FUSER:$FUSER /home/$FUSER/$COMPONENT && cd /home/$FUSER/$COMPONENT &>> $LOGFILE
   stat $?
 
-  echo -n "Installing nodejs and their packages : "
+  echo -n "Downloading nodejs packages and dependencies: "
   npm install &>> $LOGFILE
   stat $?
 
