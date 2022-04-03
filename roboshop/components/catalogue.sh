@@ -29,7 +29,7 @@ echo -n "Unzipping $COMPONENT : "
 unzip -o /tmp/catalogue.zip  &>> $LOGFILE
 stat $?
 
-mv catalogue-main $COMPONENT
+mv -f catalogue-main $COMPONENT
 cd /home/$FUSER/$COMPONENT
 echo -n "Intalling nodejs and their packages : "
 npm install&>> $LOGFILE
