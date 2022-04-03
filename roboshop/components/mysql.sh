@@ -28,6 +28,7 @@ if [ $? -ne 0]; then
   stat $?
 fi
 
+
 ## mysql_secure_installation
 ## mysql -uroot -pRoboShop@1
 #> uninstall plugin validate_password;
