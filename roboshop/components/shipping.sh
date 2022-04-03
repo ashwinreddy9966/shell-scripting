@@ -7,7 +7,7 @@ echo -n "Installing Maven : "
 yum install maven -y &>> $LOGFILE
 stat $?
 
-echo "Adding $FUSER User : "
+echo -n "Adding $FUSER User : "
 USER_SETUP
 stat $?
 
