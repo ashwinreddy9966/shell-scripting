@@ -22,7 +22,7 @@ fi
 
 echo -n "Downloading $1 and unzipping:"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip"
-rm -rf /home/$FUSER/$COMPONENT && cd /home/$FUSER && unzip -o /tmp/catalogue.zip &>> $LOGFILE && mv catalogue-main $COMPONENT && cd /home/$FUSER/$COMPONENT &>> $LOGFILE
+rm -rf /home/$FUSER/$COMPONENT && cd /home/$FUSER && unzip -o /tmp/catalogue.zip &>> $LOGFILE && mv catalogue-main $COMPONENT && chown -R  $FUSER:$FUSER /home/$FUSER/$COMPONENT && cd /home/$FUSER/$COMPONENT &>> $LOGFILE
 stat $?
 
 echo -n "Installing nodejs and their packages : "
