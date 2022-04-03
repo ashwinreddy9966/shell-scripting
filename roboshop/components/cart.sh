@@ -1,3 +1,9 @@
 #!/bin/bash
 
-echo "Cart Component"
+
+source components/common.sh
+COMPONENT=user
+
+NODEJS
+
+SVC_SETUP
