@@ -37,8 +37,11 @@ stat $?
 
 mv /home/$FUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
 chown $FUSER:$FUSER /etc/systemd/system/$COMPONENT.service
+echo -n "Daemon-reload : "  &>> $LOGFILE
 systemctl daemon-reload  &>> $LOGFILE
+stat $?
 
 echo -n "Starting $COMPONENT"
 systemctl start $COMPONENT &>> $LOGFILE
 systemctl enable $COMPONENT &>> $LOGFILE
+stat $?
