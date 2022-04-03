@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source common.sh
+source components/common.sh
 echo -n "Installing Nignix : "
 yum install nginx -y &>> $LOGFILE
 stat $?
