@@ -17,23 +17,32 @@ systemctl start mysqld &>>${LOGFILE}
 stat $?
 
 echo -n "Fetching the default root password : "
-grep temp /var/log/mysqld.log
-# mysql_secure_installation
-# mysql -uroot -pRoboShop@1
-> uninstall plugin validate_password;
+DEFAULT_ROOT_PASSWORD=$(sudo grep temp /var/log/mysqld.log | head -n 1 |  awk -F " " '{print $NF}')
 
-## **Setup Needed for Application.**
+echo -n "show databases;" | mysql -uroot -pRoboShop@1
+if [ $? -ne 0]; then
+  echo "Updating the $COMPONENT root password"
+  echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('RoboShop@1');" >/tmp/rootpass.sql
+  mysql --connect-expired-password -uroot -p"${DEFAULT_ROOT_PASSWORD}" </tmp/rootpass.sql &>>${LOGFILE}
+  stat $?
+fi
 
-As per the architecture diagram, MySQL is needed by
-
-- Shipping Service
-
-So we need to load that schema into the database, So those applications will detect them and run accordingly.
-
-To download schema, Use the following command
-
-```bash
-# curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip"
-```
-
-Load the schema for Services.
+## mysql_secure_installation
+## mysql -uroot -pRoboShop@1
+#> uninstall plugin validate_password;
+#
+### **Setup Needed for Application.**
+#
+#As per the architecture diagram, MySQL is needed by
+#
+#- Shipping Service
+#
+#So we need to load that schema into the database, So those applications will detect them and run accordingly.
+#
+#To download schema, Use the following command
+#
+#```bash
+## curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip"
+#```
+#
+#Load the schema for Services.
