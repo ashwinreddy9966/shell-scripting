@@ -12,7 +12,7 @@ yum install nodejs gcc-c++ -y  $>> $LOGFILE
 stat $?
 
 echo -n "creating the $FUSER :"
-id $FUSER
+id $FUSER   $>> $LOGFILE
 if [ $? -ne 0 ]; then
   useradd $FUSER
   stat $?
