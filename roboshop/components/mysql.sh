@@ -16,13 +16,14 @@ systemctl enable mysqld &>>${LOGFILE}
 systemctl start mysqld &>>${LOGFILE}
 stat $?
 
-echo -n "Fetching the default root password : "
-DEFAULT_ROOT_PASSWORD=$(sudo grep temp /var/log/mysqld.log | head -n 1 |  awk -F " " '{print $NF}')
+#echo -n "Fetching the default root password : "
+#DEFAULT_ROOT_PASSWORD=$(sudo grep temp /var/log/mysqld.log | head -n 1 |  awk -F " " '{print $NF}')
 
 echo -n "show databases;" | mysql -uroot -pRoboShop@1
 if [ $? -ne 0]; then
-  echo "Updating the $COMPONENT root password"
+  echo "Changing the $COMPONENT root password"
   echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('RoboShop@1');" >/tmp/rootpass.sql
+  DEFAULT_ROOT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
   mysql --connect-expired-password -uroot -p"${DEFAULT_ROOT_PASSWORD}" </tmp/rootpass.sql &>>${LOGFILE}
   stat $?
 fi
