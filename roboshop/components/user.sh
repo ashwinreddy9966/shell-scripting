@@ -1,8 +1,9 @@
 #!/bin/bash
 set -e
-COMPONENT=catalogue
+COMPONENT=redis
 source components/common.sh
 
+# Made Function for the below
 #echo -n "Configuring the RPM repo for nodeJS :"
 #curl -fsSL https://rpm.nodesource.com/setup_lts.x | bash - &>> ${LOGFILE}
 #stat $?
@@ -22,15 +23,16 @@ source components/common.sh
 #
 #echo -n "Downloading $1 and unzipping:"
 #curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip"
-#rm -rf /home/$FUSER/$COMPONENT && cd /home/$FUSER && unzip -o /tmp/catalogue.zip &>> $LOGFILE && mv ${COMPONENT}-main $COMPONENT && chown -R  $FUSER:$FUSER /home/$FUSER/$COMPONENT && cd /home/$FUSER/$COMPONENT &>> $LOGFILE
+#rm -rf /home/$FUSER/$COMPONENT && cd /home/$FUSER && unzip -o /tmp/catalogue.zip &>> $LOGFILE && mv catalogue-main $COMPONENT && chown -R  $FUSER:$FUSER /home/$FUSER/$COMPONENT && cd /home/$FUSER/$COMPONENT &>> $LOGFILE
 #stat $?
-
+#
 #echo -n "Installing nodejs and their packages : "
 #npm install &>> $LOGFILE
 #stat $?
 
 NODEJS
 
+# Made function for the below
 ##1. Updating SystemD file with correct DNS Name
 #echo -n "Updating the mogndodns name : "
 #sed -i -e 's/MONGO_DNSNAME/mongodb.robotlearning.internal/'  /home/$FUSER/$COMPONENT/systemd.service

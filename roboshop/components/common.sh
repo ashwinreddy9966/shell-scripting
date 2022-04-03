@@ -5,6 +5,9 @@ if [ $ID -ne 0 ]; then
   exit 1
 fi
 
+FUSER=roboshop
+LOGFILE="/tmp/robot.log"
+
 stat() {
   if [ $1 -eq 0 ]; then
     echo -e "\e[32m Success \e[0m"
@@ -13,5 +16,49 @@ stat() {
 fi
 }
 
-FUSER=roboshop
-LOGFILE="/tmp/robot.log"
+echo -n "creating the $FUSER user:"
+id $FUSER   &>> $LOGFILE
+if [ $? -ne 0 ]; then
+  useradd $FUSER
+  stat $?
+else
+  echo -e "\e[33m $FUSER user exists , skipping \e[0m"
+fi
+
+SVC-SETUP() {
+  #1. Updating SystemD file with correct DNS Name
+  echo -n "Updating the $COMPONENT DNS name : "
+  sed -i -e 's/MONGO_DNSNAME/mongodb.robotlearning.internal/' -e 's/REDIS_ENDPOINT/redis.robotlearning.internal/'  /home/$FUSER/$COMPONENT/systemd.service
+  stat $?
+  #2. Now, lets set up the service with systemctl.
+
+  mv /home/$FUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
+  chown $FUSER:$FUSER /etc/systemd/system/$COMPONENT.service
+  echo -n "Daemon-reload : "  &>> $LOGFILE &&  systemctl daemon-reload  &>> $LOGFILE
+  stat $?
+
+  echo -n "Starting $COMPONENT"
+  systemctl start $COMPONENT &>> $LOGFILE && systemctl enable $COMPONENT &>> $LOGFILE
+  stat $?
+}
+
+#NODEJS_FUNCTION
+NODEJS() {
+  echo -n "Configuring the RPM repo for nodeJS :"
+  curl -fsSL https://rpm.nodesource.com/setup_lts.x | bash - &>> ${LOGFILE}
+  stat $?
+
+  echo -n "Installing nodeJS : "
+  yum install nodejs gcc-c++ -y  &>> $LOGFILE
+  stat $?
+
+  echo -n "Downloading $1 and unzipping:"
+  curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip"
+  rm -rf /home/$FUSER/$COMPONENT && cd /home/$FUSER && unzip -o /tmp/$COMPONENT.zip &>> $LOGFILE && mv ${COMPONENT}-main $COMPONENT && chown -R  $FUSER:$FUSER /home/$FUSER/$COMPONENT && cd /home/$FUSER/$COMPONENT &>> $LOGFILE
+  stat $?
+
+  echo -n "Installing nodejs and their packages : "
+  npm install &>> $LOGFILE
+  stat $?
+
+}
