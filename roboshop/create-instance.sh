@@ -1,5 +1,6 @@
 #!/bin/bash
 
+COMPONENT=$1
 if [ -z "$1" ] ; then
   echo -e "\e[31m Machine Name is needed \e[0m"
   exit
