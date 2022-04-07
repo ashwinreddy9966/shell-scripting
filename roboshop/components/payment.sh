@@ -13,3 +13,4 @@ DOWNLOAD_AND_INSTALL
   
 echo -n "Installing Python Dependencies :"
 pip3 install -r requirements.txt &>> $LOGFILE
+stat $?
