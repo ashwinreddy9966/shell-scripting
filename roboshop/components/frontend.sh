@@ -23,7 +23,15 @@ echo -n "Configuring the nginx config : "
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
 stat $?
 
+for component in catalogue user cart shipping payment; do
+  echo -e "Updating $COMPONENT in Configuration"
+  sed -i -e "/${$COMPONENT}/s/localhost/${$COMPONENT}.robotlearning.internal/"  /etc/nginx/default.d/roboshop.conf
+  stat $?
+done
+
 systemctl enable nginx
 echo -n "Restarting Nginx : "
 systemctl restart nginx
 stat $?
+
+
