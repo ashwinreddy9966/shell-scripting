@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source components/common.sh
-COMPONENT=rabbitmq
+COMPONENT=payment
 
 echo -n "Installing Python3 : "
 yum install python36 gcc python3-devel -y &>> $LOGFILE
