@@ -16,10 +16,15 @@ yum install rabbitmq-server -y &>> $LOGFILE
 stat $?
 
 echo -n "Starting RabbitMQ :"
-systemctl enable rabbitmq-server
-systemctl start rabbitmq-server
+systemctl enable rabbitmq-server &>> $LOGFILE
+systemctl start rabbitmq-server &>> $LOGFILE
 stat $?
 
 echo -n "Creating Application User: "
-rabbitmqctl add_user roboshop roboshop123 &>> ${LOGFILE}
-stat $?
+rabbitmqctl list_users |grep roboshop
+if [ $? -ne 0 ]; then
+  rabbitmqctl add_user roboshop roboshop123 &>> ${LOGFILE}
+  stat $?
+else
+  echo "Skipping"
+fi
