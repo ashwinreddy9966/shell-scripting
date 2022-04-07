@@ -3,7 +3,7 @@
 source components/common.sh
 COMPONENT=rabbitmq
 
-echo -n "Installing ERLang : "
+echo -n "Installing ERLang :"
 yum install https://github.com/rabbitmq/erlang-rpm/releases/download/v23.2.6/erlang-23.2.6-1.el7.x86_64.rpm -y &>> LOGFILE
 stat $?
 
@@ -12,7 +12,7 @@ curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/sc
 stat $?
 
 echo -n "Installing RabbitMQ :"
-yum install rabbitmq-server -y &>> &LOGFILE
+yum install rabbitmq-server -y &>> $LOGFILE
 stat $?
 
 echo -n "Starting RabbitMQ :"
@@ -21,5 +21,5 @@ systemctl start rabbitmq-server
 stat $?
 
 echo -n "Creating Application User: "
-rabbitmqctl add_user roboshop roboshop123 &>>&{LOGFILE}
+rabbitmqctl add_user roboshop roboshop123 &>> ${LOGFILE}
 stat $?
