@@ -21,7 +21,7 @@ systemctl start rabbitmq-server &>> $LOGFILE
 stat $?
 
 echo -n "Creating Application User: "
-rabbitmqctl list_users |grep roboshop
+rabbitmqctl list_users |grep roboshop &>> $LOGFILE
 if [ $? -ne 0 ]; then
   rabbitmqctl add_user roboshop roboshop123 &>> ${LOGFILE}
   stat $?
