@@ -15,7 +15,7 @@ PRIVATE_IP=$(aws ec2 run-instances \
                    --instance-type t3.micro \
                    --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$COMPONENT}]" \
                    --security-group-ids $SGID \
-                   | jq '.Instances[].PrivateIpAddress' | sed 's/"/s/g')
+                   | jq '.Instances[].PrivateIpAddress' | sed 's/"//g')
 
 sed -e "s/IPADDRESS/${PRIVATE_IP}/" -e "s/COMPONENT/${COMPONENT}/" route53.json >/tmp/record.json
-#aws route53 change-resource-record-sets --hosted-zone-id ${ZONE_ID} --change-batch file:///tmp/record.json | jq
+aws route53 change-resource-record-sets --hosted-zone-id ${ZONE_ID} --change-batch file:///tmp/record.json | jq
