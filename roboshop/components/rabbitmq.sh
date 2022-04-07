@@ -28,3 +28,7 @@ if [ $? -ne 0 ]; then
 else
   echo "Skipping"
 fi
+
+echo -n "Configuring the RabbitMQ User : "
+rabbitmqctl set_user_tags roboshop administrator &>>${LOGFILE} && rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>${LOGFILE}
+stat $?
