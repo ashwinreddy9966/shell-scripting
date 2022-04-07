@@ -16,6 +16,7 @@ echo -n "Extracting the frontend"
 unzip /tmp/frontend.zip &>> $LOGFILE
 stat $?
 
+
 mv frontend-main/* .
 mv static/* .
 rm -rf frontend-main README.md
