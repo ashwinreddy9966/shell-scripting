@@ -25,7 +25,7 @@ mv localhost.conf /etc/nginx/default.d/roboshop.conf
 stat $?
 
 for component in catalogue user cart shipping payment; do
-  echo -e "Updating $COMPONENT in Configuration"
+  echo -e "Updating Configuration"
  # sed -i -e "/${$COMPONENT}/s/localhost/${$COMPONENT}.robotlearning.internal/"  /etc/nginx/default.d/roboshop.conf
   sed -i -e "/${component}/s/localhost/${component}.robotlearning.internal/"  /etc/nginx/default.d/roboshop.conf
   stat $?
