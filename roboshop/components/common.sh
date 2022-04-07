@@ -22,8 +22,14 @@ USER_SETUP() {
     echo -n "Adding Application User"
     useradd ${FUSER} &>>${LOGFILE}
     stat $?
-
   fi
+}
+
+DOWNLOAD_AND_INSTALL() {
+  echo -n "Downloading $COMPONENT and unzipping:"
+  curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip"
+  rm -rf /home/$FUSER/$COMPONENT && cd /home/$FUSER && unzip -o /tmp/$COMPONENT.zip &>> $LOGFILE && mv ${COMPONENT}-main $COMPONENT && chown -R  $FUSER:$FUSER /home/$FUSER/$COMPONENT && cd /home/$FUSER/$COMPONENT &>> $LOGFILE
+  stat $?
 }
 
 SVC_SETUP() {
@@ -65,11 +71,8 @@ NODEJS() {
   stat $?
 
   USER_SETUP
-
-  echo -n "Downloading $COMPONENT and unzipping:"
-  curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip"
-  rm -rf /home/$FUSER/$COMPONENT && cd /home/$FUSER && unzip -o /tmp/$COMPONENT.zip &>> $LOGFILE && mv ${COMPONENT}-main $COMPONENT && chown -R  $FUSER:$FUSER /home/$FUSER/$COMPONENT && cd /home/$FUSER/$COMPONENT &>> $LOGFILE
-  stat $?
+  
+  DOWNLOAD_AND_INSTALL
 
   echo -n "Downloading nodejs packages and dependencies: "
   npm install &>> $LOGFILE
