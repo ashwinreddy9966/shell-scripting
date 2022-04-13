@@ -16,9 +16,8 @@ systemctl enable mysqld &>>${LOGFILE}
 systemctl start mysqld &>>${LOGFILE}
 stat $?
 
-#echo -n "Fetching the default root password : "
-#DEFAULT_ROOT_PASSWORD=$(sudo grep temp /var/log/mysqld.log | head -n 1 |  awk -F " " '{print $NF}')
-
+echo -n "Fetching the default root password : "
+DEFAULT_ROOT_PASSWORD=$(sudo grep temp /var/log/mysqld.log | head -n 1 |  awk -F " " '{print $NF}')
 
 # Echo removing the password validate plugin :
 echo show plugins | mysql -uroot -pRoboShop@1 &>>${LOGFILE} | grep validate_password &>>${LOGFILE}
