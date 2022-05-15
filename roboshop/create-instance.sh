@@ -7,7 +7,8 @@ if [ -z "$1" ] ; then
 fi
 
 ZONE_ID="Z0986768G0Z9NX43SZ0Z"
-AMI_ID=$(aws ec2 describe-images --filters "Name=name,Values=Centos-7-DevOps-Practice" |jq '.Images[].ImageId' | sed -e 's/"//g')
+AMI_ID="ami-0bbf343df79c1d397"
+#AMI_ID=$(aws ec2 describe-images --filters "Name=name,Values=Centos-7-DevOps-Practice" |jq '.Images[].ImageId' | sed -e 's/"//g')
 echo $AMI_ID
 SGID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=robot-allow-all |jq '.SecurityGroups[].GroupId' | sed -e 's/"//g')
 
